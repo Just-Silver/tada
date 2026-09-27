@@ -13,7 +13,7 @@
 - [ ] **1. 导出数据包含明文 API Key / 代理密码** ⤴
   - 位置：`packages/web/src/services/localStorageService.ts:681-702`、`packages/desktop/src/services/sqliteStorageService.ts`（`exportData`）、`packages/core/src/components/features/settings/DataSettings.tsx:301-333`
   - 问题：`exportData()` 原样导出 `settings.ai.apiKey` 与 `settings.proxy.password`；导入时 `includeSettings` 默认 `true`（`DataSettings.tsx:392`）。
-  - 修复：导出时剔除或掩码敏感字段；导出为可选、默认关闭；添加显著提示。
+  - 修复方向：**整包口令加密**——导出设密码、导入输密码解密；保留旧明文备份兼容。详见 [`specs/2026-09-27-encrypted-backup-design.md`](./specs/2026-09-27-encrypted-backup-design.md)。
   - 建议分支：`fix/export-secret-leak`
 
 - [ ] **2. 代理凭据被写入控制台日志** ⤴
